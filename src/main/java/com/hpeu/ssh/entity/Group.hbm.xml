@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2018-5-24 16:14:07 by Hibernate Tools 3.5.0.Final -->
+<hibernate-mapping>
+    <class name="com.hpeu.ssh.entity.Group" table="t_GROUP">
+        <id name="groupId" type="int">
+            <column name="GROUP_ID" />
+            <generator class="native" />
+        </id>
+        <property name="groupName" type="java.lang.String">
+            <column name="GROUP_NAME" />
+        </property>
+        <property name="batch" type="java.lang.String">
+            <column name="BATCH" />
+        </property>
+        <property name="remark" type="java.lang.String">
+            <column name="REMARK" />
+        </property>
+        <property name="createDate" type="java.sql.Timestamp">
+            <column name="CREATE_DATE" />
+        </property>
+        <property name="updateDate" type="java.sql.Timestamp">
+            <column name="UPDATE_DATE" />
+        </property>
+         <many-to-one name="managerId" class="com.hpeu.ssh.entity.User"  cascade="all" lazy="false" fetch="join">
+            <column name="manager_Id" />
+        </many-to-one>
+        
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.5//EN"
+    "http://struts.apache.org/dtds/struts-2.5.dtd">
+
+<struts>
+
+    <constant name="struts.devMode" value="true" />
+
+    <package name="ssh" extends="struts-default">
+        
+        <action name="buyitem_submit" class="com.hpeu.ssh.controller.buyitem.BuyitemController" method="find">
+        	<result name="success">/pages/success.jsp</result>
+        	<result name="error">/pages/success.jsp</result>
+        </action> 
+        
+         <action name="see_my_submit" class="com.hpeu.ssh.controller.buyitem.SeeMyBuyitemController" method="find">
+        </action>
+        
+        <action name="list_buyitem" class="com.hpeu.ssh.controller.buyitem.BuyitemListController" method="find">
+        </action>
+        
+        <action name="aremark" class="com.hpeu.ssh.controller.buyitem.BuyitemListController" method="findRe">
+       <result name="success">/pages/Buyitem/list_buyitem.jsp</result>
+        </action>
+        
+        <action name="scores_group" class="com.hpeu.ssh.controller.scores.SubmitScoresController" method="find">
+        </action>
+        
+         <action name="scores_submit" class="com.hpeu.ssh.controller.scores.SubmitScoresController" method="findSu">
+         <result name="success">/pages/Scores/list_scores.jsp</result>
+        </action>
+        
+         <action name="list_scores_group" class="com.hpeu.ssh.controller.scores.SubmitScoresController" method="findUs">
+        </action>
+        
+         <action name="one_scores_group" class="com.hpeu.ssh.controller.scores.SubmitScoresController" method="findRe">
+        </action>
+            
+    </package>
+
+</struts>

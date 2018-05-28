@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2018-5-24 16:14:07 by Hibernate Tools 3.5.0.Final -->
+<hibernate-mapping>
+    <class name="com.hpeu.ssh.entity.Attendance" table="t_ATTENDANCE">
+        <id name="attendanceId" type="int">
+            <column name="attendance_id" />
+            <generator class="native" />
+        </id>
+        <property name="attendanceDate" type="java.sql.Date">
+            <column name="attendance_date" />
+        </property>
+        <property name="morningTime" type="java.sql.Timestamp">
+            <column name="morning_time" />
+        </property>
+        <property name="afternoonTime" type="java.sql.Timestamp">
+            <column name="afternoon_time" />
+        </property>
+        <property name="nightTime" type="java.sql.Timestamp">
+            <column name="night_time" />
+        </property>
+        <property name="status" type="int">
+            <column name="STATUS" />
+        </property>
+        <many-to-one name="userId" class="com.hpeu.ssh.entity.User" cascade="all" lazy="false" fetch="join">
+            <column name="user_id" />
+        </many-to-one>
+    </class>
+</hibernate-mapping>

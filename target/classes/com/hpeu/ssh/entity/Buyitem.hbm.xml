@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2018-5-24 16:14:07 by Hibernate Tools 3.5.0.Final -->
+<hibernate-mapping>
+    <class name="com.hpeu.ssh.entity.Buyitem" table="t_BUYITEM">
+        <id name="buyitemId" type="int">
+            <column name="BUYITEM_ID" />
+            <generator class="native" />
+        </id>
+        <property name="title" type="java.lang.String">
+            <column name="TITLE" />
+        </property>
+        <property name="content" type="java.lang.String">
+            <column name="CONTENT" />
+        </property>
+        <property name="remark" type="java.lang.String">
+            <column name="REMARK" />
+        </property>
+        <property name="status" type="int">
+            <column name="STATUS" />
+        </property>
+        <property name="result" type="int">
+            <column name="RESULT" />
+        </property>
+        <property name="createDate" type="java.sql.Timestamp">
+            <column name="CREATE_DATE" />
+        </property>
+        <many-to-one name="applyUser" class="com.hpeu.ssh.entity.User" cascade="all" lazy="false" fetch="join">
+            <column name="APPLY_USER" />
+        </many-to-one>
+        <many-to-one name="approvalUser" class="com.hpeu.ssh.entity.User" cascade="all" lazy="false" fetch="join">
+            <column name="APPROVAL_USER" />
+        </many-to-one>
+    </class>
+</hibernate-mapping>

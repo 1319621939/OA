@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2018-5-24 16:34:20 by Hibernate Tools 3.5.0.Final -->
+<hibernate-mapping>
+    <class name="com.hpeu.ssh.entity.ProcessLeave" table="t_PROCESSLEAVE">
+        <id name="plId" type="int">
+            <column name="PL_ID" />
+            <generator class="native" />
+        </id>
+        <property name="orderValue" type="int">
+            <column name="ORDER_VALUE" />
+        </property>
+        <property name="underway" type="int">
+            <column name="UNDERWAY" />
+        </property>
+        <property name="status" type="int">
+            <column name="STATUS" />
+        </property>
+        <property name="result" type="int">
+            <column name="RESULT" />
+        </property>
+        <many-to-one name="leaveId" class="com.hpeu.ssh.entity.Leave" cascade="all" lazy="false" fetch="join">
+            <column name="LEAVE_ID" />
+        </many-to-one>
+        <many-to-one name="approvalUser" class="com.hpeu.ssh.entity.User" cascade="all" lazy="false" fetch="join">
+            <column name="APPROVAL_USER" />
+        </many-to-one>
+    </class>
+</hibernate-mapping>

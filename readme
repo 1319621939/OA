@@ -1,0 +1,13 @@
+设计数据库
+t_user
+----------
+1、导包
+2、entity、dao、service、controller、util（编写实体对象-->控制器）
+3、编写配置文件
+	applicationContext.xml、struts.xml、entity.hbm.xml
+
+4、测试
+5、配置web.xml
+	struts的核心过滤器，spring的监听器（加载spring的配置文件）
+6、编写前端页面
+7、测下整合是否成功

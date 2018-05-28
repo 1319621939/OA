@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2018-5-24 16:14:07 by Hibernate Tools 3.5.0.Final -->
+<hibernate-mapping>
+    <class name="com.hpeu.ssh.entity.Blog" table="t_BLOG">
+        <id name="blogId" type="int">
+            <column name="blog_id" />
+            <generator class="native" />
+        </id>
+        <property name="blogTitle" type="java.lang.String">
+            <column name="blog_title" />
+        </property>
+        <property name="blogContent" type="java.lang.String">
+            <column name="BLOG_CONTENT" />
+        </property>
+        <property name="createDate" type="java.sql.Timestamp">
+            <column name="CREATE_DATE" />
+        </property>
+        <property name="updateDate" type="java.sql.Timestamp">
+            <column name="UPDATE_DATE" />
+        </property>
+        <many-to-one name="userId" class="com.hpeu.ssh.entity.User" cascade="all" lazy="false" fetch="join">
+            <column name="USER_ID" />
+        </many-to-one>
+        <property name="isDel" type="int">
+            <column name="IS_DEL" />
+        </property>
+    </class>
+</hibernate-mapping>

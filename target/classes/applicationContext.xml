@@ -1,0 +1,278 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:context="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans-4.3.xsd
+		http://www.springframework.org/schema/aop 
+		http://www.springframework.org/schema/aop/spring-aop.xsd
+		http://www.springframework.org/schema/context 
+		http://www.springframework.org/schema/context/spring-context.xsd
+		http://www.springframework.org/schema/tx 
+		http://www.springframework.org/schema/tx/spring-tx.xsd">
+
+
+
+	<!-- 加载外边配置文件 -->
+	<context:property-placeholder location="classpath:jdbc.properties" />
+
+	<!-- 配置数据库连接池 -->
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
+		<property name="driverClassName" value="${jdbc.driverClass}" />
+		<property name="url" value="${jdbc.url}" />
+		<property name="username" value="${jdbc.username}" />
+		<property name="password" value="${jdbc.password}" />
+	</bean>
+
+
+	<!-- 配置sessionFactory -->
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
+		<!-- 配置数据库连接 交给了数据库连接池处理 -->
+		<property name="dataSource" ref="dataSource" />
+
+		<!-- 配置实体对象对应的映射文件 -->
+		<property name="mappingResources">
+			<list>
+			    <value>/com/hpeu/ssh/entity/ApprovalInfo.hbm.xml</value>
+				<value>/com/hpeu/ssh/entity/ApprovalScores.hbm.xml</value>
+				<value>/com/hpeu/ssh/entity/Attendance.hbm.xml</value>
+				<value>/com/hpeu/ssh/entity/Blog.hbm.xml</value>
+				<value>/com/hpeu/ssh/entity/Buyitem.hbm.xml</value>
+				<value>/com/hpeu/ssh/entity/Comment.hbm.xml</value>
+				<value>/com/hpeu/ssh/entity/Friends.hbm.xml</value>
+				<value>/com/hpeu/ssh/entity/Group.hbm.xml</value>
+				<value>/com/hpeu/ssh/entity/Leave.hbm.xml</value>
+				<value>/com/hpeu/ssh/entity/Notice.hbm.xml</value>
+				<value>/com/hpeu/ssh/entity/ProcessFriends.hbm.xml</value>
+				<value>/com/hpeu/ssh/entity/ProcessInfo.hbm.xml</value>
+				<value>/com/hpeu/ssh/entity/ProcessLeave.hbm.xml</value>
+				<value>/com/hpeu/ssh/entity/ProcessScores.hbm.xml</value>
+				<value>/com/hpeu/ssh/entity/Scores.hbm.xml</value>
+				<value>/com/hpeu/ssh/entity/User.hbm.xml</value>
+			</list>
+		</property>
+		<!-- 配置其他属性 -->
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.show_sql"></prop>
+				<prop key="hibernate.format_sql">true</prop>
+				<prop key="hibernate.dialect">org.hibernate.dialect.MySQL5InnoDBDialect</prop>
+				<prop key="hibernate.hbm2ddl.auto"></prop>
+			</props>
+		</property>
+	</bean>
+	
+	<!-- approvalInfo -->
+
+	<bean id="approvalInfoDao" class="com.hpeu.ssh.dao.impl.ApprovalInfoDaoImpl">
+		<constructor-arg ref="sessionFactory" />
+	</bean>
+
+	<bean id="approvalInfoService" class="com.hpeu.ssh.service.impl.ApprovalInfoServiceImpl">
+		<property name="approvalInfoDao" ref="approvalInfoDao" />
+	</bean>
+	
+	<!-- approvalScores -->
+
+	<bean id="approvalScoresDao" class="com.hpeu.ssh.dao.impl.ApprovalScoresDaoImpl">
+		<constructor-arg ref="sessionFactory" />
+	</bean>
+
+	<bean id="approvalScoresService" class="com.hpeu.ssh.service.impl.ApprovalScoresServiceImpl">
+		<property name="approvalScoresDao" ref="approvalScoresDao" />
+	</bean>
+	
+	<!-- Attendance -->
+
+	<bean id="attendanceDao" class="com.hpeu.ssh.dao.impl.AttendanceDaoImpl">
+		<constructor-arg ref="sessionFactory" />
+	</bean>
+
+	<bean id="attendanceService" class="com.hpeu.ssh.service.impl.AttendanceServiceImpl">
+		<property name="attendanceDao" ref="attendanceDao" />
+	</bean>
+	
+	<!-- Blog -->
+
+	<bean id="blogDao" class="com.hpeu.ssh.dao.impl.BlogDaoImpl">
+		<constructor-arg ref="sessionFactory" />
+	</bean>
+
+	<bean id="blogService." class="com.hpeu.ssh.service.impl.BlogServiceImpl">
+		<property name="blogDao" ref="blogDao" />
+	</bean>
+	
+	<!-- buyitem -->
+	<bean id="buyitemDao" class="com.hpeu.ssh.dao.impl.BuyitemDaoImpl">
+		<constructor-arg ref="sessionFactory" />
+	</bean>
+
+	<bean id="buyitemService" class="com.hpeu.ssh.service.impl.BuyitemServiceImpl">
+		<property name="buyitemDao" ref="buyitemDao" />
+	</bean>
+	
+	<bean id="buyitemController" class="com.hpeu.ssh.controller.buyitem.BuyitemController">
+		<constructor-arg ref="buyitemService" />
+	</bean>
+	
+	<bean id="buyitemListController" class="com.hpeu.ssh.controller.buyitem.BuyitemListController">
+		<constructor-arg ref="buyitemService" />
+	</bean>
+	
+	<bean id="seeMyBuyitemController" class="com.hpeu.ssh.controller.buyitem.SeeMyBuyitemController">
+		<constructor-arg ref="buyitemService" />
+	</bean>
+	
+	<!-- Comment -->
+
+	<bean id="commentDao" class="com.hpeu.ssh.dao.impl.CommentDaoImpl">
+		<constructor-arg ref="sessionFactory" />
+	</bean>
+
+	<bean id="commentService" class="com.hpeu.ssh.service.impl.CommentServiceImpl">
+		<property name="commentDao" ref="commentDao" />
+	</bean>
+	
+	
+	<!-- friends -->
+
+	<bean id="friendsDao" class="com.hpeu.ssh.dao.impl.FriendsDaoImpl">
+		<constructor-arg ref="sessionFactory" />
+	</bean>
+
+	<bean id="friendsService" class="com.hpeu.ssh.service.impl.FriendsServiceImpl">
+		<property name="friendsDao" ref="friendsDao" />
+	</bean>
+	
+	<!-- Group -->
+
+	<bean id="groupDao" class="com.hpeu.ssh.dao.impl.GroupDaoImpl">
+		<constructor-arg ref="sessionFactory" />
+	</bean>
+
+	<bean id="groupService" class="com.hpeu.ssh.service.impl.GroupServiceImpl">
+		<property name="groupDao" ref="groupDao" />
+	</bean>
+	
+	<bean id="groupSubmitScoresController" class="com.hpeu.ssh.controller.scores.SubmitScoresController">
+		<constructor-arg ref="groupService" />
+	</bean> 
+	
+	<!-- Leave -->
+
+	<bean id="leaveDao" class="com.hpeu.ssh.dao.impl.LeaveDaoImpl">
+		<constructor-arg ref="sessionFactory" />
+	</bean>
+
+	<bean id="leaveService" class="com.hpeu.ssh.service.impl.LeaveServiceImpl">
+		<property name="leaveDao" ref="leaveDao" />
+	</bean>
+	
+	<!-- notice -->
+
+	<bean id="noticeDao" class="com.hpeu.ssh.dao.impl.NoticeDaoImpl">
+		<constructor-arg ref="sessionFactory" />
+	</bean>
+
+	<bean id="noticeService" class="com.hpeu.ssh.service.impl.NoticeServiceImpl">
+		<property name="noticeDao" ref="noticeDao" />
+	</bean>
+	
+	<!-- processFriend -->
+
+	<bean id="processFriendsDao" class="com.hpeu.ssh.dao.impl.ProcessFriendsDaoImpl">
+		<constructor-arg ref="sessionFactory" />
+	</bean>
+
+	<bean id="processFriendsService" class="com.hpeu.ssh.service.impl.ProcessFriendsServiceImpl">
+		<property name="processFriendsDao" ref="processFriendsDao" />
+	</bean>
+	
+	<!-- processInfo -->
+
+	<bean id="processInfoDao" class="com.hpeu.ssh.dao.impl.ProcessInfoDaoImpl">
+		<constructor-arg ref="sessionFactory" />
+	</bean>
+
+	<bean id="processInfoService" class="com.hpeu.ssh.service.impl.ProcessInfoServiceImpl">
+		<property name="processInfoDao" ref="processInfoDao" />
+	</bean>
+	
+	<!-- processLeave -->
+
+	<bean id="processLeaveDao" class="com.hpeu.ssh.dao.impl.ProcessLeaveDaoImpl">
+		<constructor-arg ref="sessionFactory" />
+	</bean>
+
+	<bean id="processLeaveService" class="com.hpeu.ssh.service.impl.ProcessLeaveServiceImpl">
+		<property name="processLeaveDao" ref="processLeaveDao" />
+	</bean>
+	
+	<!-- processScore -->
+
+	<bean id="processScoresDao" class="com.hpeu.ssh.dao.impl.ProcessScoresDaoImpl">
+		<constructor-arg ref="sessionFactory" />
+	</bean>
+
+	<bean id="processScoresService" class="com.hpeu.ssh.service.impl.ProcessScoresServiceImpl">
+		<property name="processScoresDao" ref="processScoresDao" />
+	</bean>
+	
+	<!-- sroces -->
+
+	<bean id="scoresDao" class="com.hpeu.ssh.dao.impl.ScoresDaoImpl">
+		<constructor-arg ref="sessionFactory" />
+	</bean>
+
+	<bean id="scoresService" class="com.hpeu.ssh.service.impl.ScoresServiceImpl">
+		<property name="scoresDao" ref="scoresDao" />
+	</bean>
+	
+	<bean id="scoresSubmitScoresController" class="com.hpeu.ssh.controller.scores.SubmitScoresController">
+		<constructor-arg ref="scoresService" />
+	</bean> 
+	
+	<!-- user -->
+
+	<bean id="userDao" class="com.hpeu.ssh.dao.impl.UserDaoImpl">
+		<constructor-arg ref="sessionFactory" />
+	</bean>
+
+	<bean id="userService" class="com.hpeu.ssh.service.impl.UserServiceImpl">
+		<property name="userDao" ref="userDao" />
+	</bean>
+	
+	<bean id="userSubmitScoresController" class="com.hpeu.ssh.controller.scores.SubmitScoresController">
+		<constructor-arg ref="userService" />
+	</bean> 
+
+	<!-- 配置事务及事物的切入点 -->
+	<bean id="txManager"
+		class="org.springframework.orm.hibernate5.HibernateTransactionManager">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+
+	<tx:advice id="txAdvice" transaction-manager="txManager">
+		<tx:attributes>
+			<tx:method name="get*" read-only="true" />
+			<tx:method name="find*" read-only="true" />
+			<tx:method name="select*" read-only="true" />
+			<tx:method name="save" propagation="REQUIRED" />
+			<tx:method name="update" propagation="REQUIRED" />
+			<tx:method name="add" propagation="REQUIRED" />
+			<tx:method name="del" propagation="REQUIRED" />
+			<tx:method name="*" propagation="REQUIRED" />
+		</tx:attributes>
+	</tx:advice>
+
+	<aop:config>
+		<aop:pointcut id="fooServiceOperation"
+			expression="execution(* com.hpeu.ssh.service.impl.*.*(..))" />
+		<aop:advisor advice-ref="txAdvice" pointcut-ref="fooServiceOperation" />
+	</aop:config>
+
+	<!-- 配置aop中日志的切入 -->
+
+
+</beans>

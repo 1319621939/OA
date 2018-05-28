@@ -1,0 +1,49 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2018-5-24 16:34:20 by Hibernate Tools 3.5.0.Final -->
+<hibernate-mapping>
+    <class name="com.hpeu.ssh.entity.User" table="t_USER">
+        <id name="userId" type="int">
+            <column name="USER_ID" />
+            <generator class="native" />
+        </id>
+        <property name="account" type="java.lang.String">
+            <column name="ACCOUNT" />
+        </property>
+        <property name="password" type="java.lang.String">
+            <column name="PASSWORD" />
+        </property>
+        <property name="realName" type="java.lang.String">
+            <column name="REAL_NAME" />
+        </property>
+        <property name="phone" type="java.lang.String">
+            <column name="PHONE" />
+        </property>
+        <property name="email" type="java.lang.String">
+            <column name="EMAIL" />
+        </property>
+        <property name="address" type="java.lang.String">
+            <column name="ADDRESS" />
+        </property>
+        <property name="status" type="int">
+            <column name="STATUS" />
+        </property>
+        <property name="flags" type="int">
+            <column name="FLAGS" />
+        </property>
+        <property name="createDate" type="java.sql.Timestamp">
+            <column name="CREATE_DATE" />
+        </property>
+        <property name="updateDate" type="java.sql.Timestamp">
+            <column name="UPDATE_DATE" />
+        </property>
+        <property name="idDel" type="int">
+            <column name="ID_DEL" />
+        </property>  
+         <many-to-one name="groupId" class="com.hpeu.ssh.entity.Group" cascade="all" lazy="false" fetch="join">
+            <column name="group_Id" />
+        </many-to-one>
+        
+    </class>
+</hibernate-mapping>
